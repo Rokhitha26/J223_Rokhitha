@@ -1,0 +1,183 @@
+
+Create Table Restaurant
+(
+    restaurantId number primary key,
+    restaurantName varchar2(30),
+    city varchar2(30),
+    email varchar2(30),
+    mobile varchar2(15),
+    rating number(9,2)
+);
+
+Create Table RestaurantBackup
+(
+   RbId number generated as identity primary key,
+    restaurantId number,
+    restaurantName varchar2(30),
+    city varchar2(30),
+    email varchar2(30),
+    mobile varchar2(15),
+    rating number(9,2),
+    operation varchar2(30),
+    activityOn Date default sysdate
+);
+
+//PROCEDURE addRestaurant
+create or replace procedure addRestaurant(
+rId restaurant.restaurantId%type,
+rName restaurant.restaurantName%type,
+rCity restaurant.city%type,
+rEmail restaurant.email%type,
+rMobile restaurant.mobile%type,
+rRating restaurant.rating%type)as
+begin
+insert into restaurant (restaurantId,restaurantName,city,email,mobile,rating)values(rId,rName,rCity,rEmail,rMobile,rRating);
+exception
+when others then
+dbms_output.put_line('Error in addRestaurant: ' || sqlerrm);
+end;
+/
+
+//PROCEDURE searchByRestaurantId
+
+create or replace procedure searchByRestaurantId(rId restaurant.restaurantId%type,
+rName out restaurant.restaurantName%type,
+rCity out restaurant.city%type,
+rEmail out restaurant.email%type,
+rMobile out restaurant.mobile%type,
+rRating out restaurant.rating%type
+) as
+begin
+select restaurantName,city,email,mobile,rating into rName,rCity,rEmail,rMobile,rRating from Restaurant where restaurantId=rId;
+exception
+when others then
+dbms_output.put_line('Error in searchByRestaurantId: ' || sqlerrm);
+end;
+/
+create or replace procedure searchByRestaurantId2(rId restaurant.restaurantId%type)as
+rName  restaurant.restaurantName%type;
+rCity  restaurant.city%type;
+rEmail  restaurant.email%type;
+rMobile  restaurant.mobile%type;
+rRating  restaurant.rating%type;
+begin
+searchByRestaurantId(rId,rName,rCity,rEmail,rMobile,rRating);
+dbms_output.put_line('---------------------------');
+dbms_output.put_line('RestaurantName: ' || rName);
+dbms_output.put_line('RestaurantCity: ' || rCity);
+dbms_output.put_line('RestaurantEmail: ' || rEmail);
+dbms_output.put_line('RestaurantMobile: ' || rMobile);
+dbms_output.put_line('RestaurantRating: ' || rRating);
+dbms_output.put_line('---------------------------');
+exception
+when others then
+dbms_output.put_line('Error in searchByRestaurantId2: ' || sqlerrm);
+end;
+/
+
+//PROCEDURE deleteRestaurantById
+
+create or replace procedure deleteRestaurantById(rId restaurant.restaurantId%type)as
+begin
+delete from restaurant where restaurantId=rId;
+exception
+when others then
+dbms_output.put_line('Error in deleteRestaurantById: ' || sqlerrm);
+end;
+/
+
+//PROCEDURE updateRestaurant
+
+create or replace procedure updaterestaurantinfo(
+p_restaurantid in restaurant.restaurantid%type
+) as
+v_choice number;
+v_newvalue varchar2(100);
+begin
+dbms_output.put_line('choose updates');
+dbms_output.put_line('1.restaurant name');
+dbms_output.put_line('2.city');
+dbms_output.put_line('3.email');
+dbms_output.put_line('4.mobile');
+dbms_output.put_line('5.rating');
+
+dbms_output.put_line('enter your choice:');
+v_choice := &choice;
+
+dbms_output.put_line('enter the new value:');
+v_newvalue := '&newvalue';
+
+case v_choice
+when 1 then
+update restaurant
+set restaurantname = v_newvalue
+where restaurantid = p_restaurantid;
+
+when 2 then
+update restaurant
+set city = v_newvalue
+where restaurantid = p_restaurantid;
+
+when 3 then
+update restaurant
+set email = v_newvalue
+where restaurantid = p_restaurantid;
+
+when 4 then
+update restaurant
+set mobile = v_newvalue
+where restaurantid = p_restaurantid;
+
+when 5 then
+update restaurant
+set rating = to_number(v_newvalue)
+where restaurantid = p_restaurantid;
+
+else
+dbms_output.put_line('invalid choice. no update performed.');
+return;
+end case;
+
+commit;
+dbms_output.put_line('restaurant info updated successfully.');
+
+exception
+when others then
+dbms_output.put_line('error: ' || sqlerrm);
+end;
+/
+exec updaterestaurant(1);
+
+//TRIGGER insertTrg
+
+create or replace trigger insertTrg after insert on restaurant for each row
+begin
+insert into restaurantBackup(RestaurantId,restaurantName,city,email,mobile,rating,operation) values(:new.restaurantId,:new.restaurantName,:new.city,:new.email,:new.mobile,:new.rating,'inserted');
+exception
+when others then
+dbms_output.put_line('error: ' || sqlerrm);
+end;
+/
+
+//TRIGGER deleteTrg
+
+create or replace trigger deleteTrg after delete on restaurant for each row
+begin
+insert into
+restaurantBackup(RestaurantId,restaurantName,city,email,mobile,rating,operation) values(:old.restaurantId,:old.restaurantName,:old.city,:old.email,:old.mobile,:old.rating,'deletedData');
+exception
+when others then
+dbms_output.put_line('error: ' || sqlerrm);
+end;
+/
+
+//TRIGGER updateTrg
+create or replace trigger updateTrg after update on restaurant for each row
+begin
+insert into
+restaurantBackup(RestaurantId,restaurantName,city,email,mobile,rating,operation) values(:old.restaurantId,:old.restaurantName,:old.city,:old.email,:old.mobile,:old.rating,'thisRowWasUpdatedToNewData');
+exception
+when others then
+dbms_output.put_line('error: ' || sqlerrm);
+end;
+/
