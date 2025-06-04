@@ -181,3 +181,32 @@ when others then
 dbms_output.put_line('error: ' || sqlerrm);
 end;
 /
+
+//CURSOR
+
+create or replace procedure printallrestaurants is
+v_restaurantid    restaurant.restaurantid%type;
+v_restaurantname  restaurant.restaurantname%type;
+v_city            restaurant.city%type;
+v_email           restaurant.email%type;
+v_mobile          restaurant.mobile%type;
+v_rating          restaurant.rating%type;
+
+cursor restaurant_cursor is
+select restaurantid, restaurantname, city, email, mobile, rating from restaurant;
+begin
+open restaurant_cursor;
+loop
+fetch restaurant_cursor into 
+v_restaurantid, v_restaurantname, v_city, v_email, v_mobile, v_rating;
+exit when restaurant_cursor%notfound;
+dbms_output.put_line('id: ' || v_restaurantid || 
+                         ', name: ' || v_restaurantname || 
+                         ', city: ' || v_city || 
+                         ', email: ' || v_email || 
+                         ', mobile: ' || v_mobile || 
+                         ', rating: ' || v_rating);
+end loop;
+close restaurant_cursor;
+end;
+/
