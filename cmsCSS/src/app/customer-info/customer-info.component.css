@@ -1,0 +1,79 @@
+/* customer-info.component.css */
+
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+.customer-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  max-width: 500px;
+  margin: 30px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.customer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.customer-header {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f1f3f5;
+  text-align: center;
+  font-weight: 600;
+}
+
+.customer-detail {
+  display: flex;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f8f9fa;
+  align-items: center;
+}
+
+.customer-label {
+  width: 160px;
+  color: #7f8c8d;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.customer-value {
+  color: #2c3e50;
+  font-weight: 600;
+  flex: 1;
+  word-break: break-word;
+}
+
+.password-field {
+  font-family: monospace;
+  letter-spacing: 1px;
+  color: #e74c3c;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .customer-card {
+    margin: 20px 15px;
+    padding: 20px;
+  }
+  
+  .customer-detail {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .customer-label {
+    width: 100%;
+    margin-bottom: 5px;
+    color: #95a5a6;
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="login-container">
+  <p>Welcome Back!</p>
+  
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="cusUsername" 
+           required [(ngModel)]="customer.cusUsername"
+           #cusUsername="ngModel" placeholder="Enter your username" />
+    
+    <div *ngIf="cusUsername.invalid && (loginForm.submitted || cusUsername.touched) && !isValid" 
+         class="error-message">
+      Please enter your username
+    </div>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="cusPassword" 
+           required [(ngModel)]="customer.cusPassword"
+           #cusPassword="ngModel" placeholder="Enter your password" />
+    
+    <div *ngIf="cusPassword.invalid && (loginForm.submitted || cusPassword.touched) && !isValid" 
+         class="error-message">
+      Please enter your password
+    </div>
+
+    <input type="submit" value="Login" />
+  </form>
+</div>

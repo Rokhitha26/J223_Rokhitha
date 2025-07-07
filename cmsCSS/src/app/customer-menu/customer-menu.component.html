@@ -1,0 +1,32 @@
+<div class="menu-container">
+  <p class="menu-title">Customer Dashboard</p>
+  
+  <nav class="nav-menu">
+    <a class="nav-link" 
+       [routerLink]="['/customerMenu',{outlets:{'customer':['customerInfo']}}]"
+       routerLinkActive="active">Customer Info</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/customerMenu',{outlets:{'customer':['customerWallet']}}]"
+       routerLinkActive="active">Wallet</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/customerMenu',{outlets:{'customer':['customerOrders']}}]"
+       routerLinkActive="active">My Orders</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/customerMenu',{outlets:{'customer':['customerPendingOrders']}}]"
+       routerLinkActive="active">Pending Orders</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/customerMenu',{outlets:{'customer':['placeOrder']}}]"
+       routerLinkActive="active">Place Order</a>
+       
+    <a class="nav-link home-link"
+       [routerLink]="['/home']">Home</a>
+  </nav>
+  
+  <hr class="divider">
+  
+  <router-outlet name="customer"></router-outlet>
+</div>

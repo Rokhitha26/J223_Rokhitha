@@ -1,0 +1,40 @@
+
+
+<form #orderForm="ngForm" (ngSubmit)="placeOrder(orderForm)">
+  Customer Id:
+  <input type="number" name="cusId" required [(ngModel)]="orders.cusId" #cusId="ngModel" /> <br /><br />
+
+  Menu Id:
+  <select name="menId" [(ngModel)]="orders.menId" #menId="ngModel">
+    <option *ngFor="let e of menu" [value]="e.menId">
+      {{ e.menItem }}
+    </option>
+  </select> <br /><br />
+
+  Vendor Id:
+  <select name="venId" [(ngModel)]="orders.venId" #venId="ngModel">
+    <option *ngFor="let e of vendor" [value]="e.venId">
+      {{ e.venName }}
+    </option>
+  </select> <br /><br />
+
+Wallet Type:
+<select name="walSource" [(ngModel)]="orders.walSource" #walSource="ngModel" required>
+  <option *ngFor="let e of wallet" [value]="e.walSource">
+    {{ e.walSource }}
+  </option>
+</select> <br /><br />
+
+
+  Order Quantity:
+  <input type="number" name="ordQuantity" required [(ngModel)]="orders.ordQuantity" #ordQuantity="ngModel" /> <br /><br />
+
+  Order Comments:
+  <input type="text" name="ordComments" required [(ngModel)]="orders.ordComments" #ordComments="ngModel" /> <br /><br />
+
+  <input type="submit" value="Place Order" />
+</form>
+
+<p>
+  Result is: <b>{{ result }}</b>
+</p>

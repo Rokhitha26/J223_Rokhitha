@@ -1,0 +1,72 @@
+/* Main container styling */
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Card styling */
+.vendor-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.vendor-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Header styling */
+.vendor-header {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Detail row styling */
+.vendor-detail {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Label styling */
+.vendor-label {
+  display: inline-block;
+  width: 150px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Value styling */
+.vendor-value {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* Password field specific styling */
+.vendor-password {
+  font-family: monospace;
+  letter-spacing: 1px;
+  color: #e53e3e;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .vendor-card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .vendor-label {
+    width: 120px;
+    font-size: 0.9rem;
+  }
+}

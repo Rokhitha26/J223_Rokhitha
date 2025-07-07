@@ -1,0 +1,50 @@
+form {
+  width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background-color: #fefefe;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #218838;
+}
+
+p {
+  margin: 0;
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+p[style] {
+  color: red;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}

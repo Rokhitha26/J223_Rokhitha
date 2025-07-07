@@ -1,0 +1,28 @@
+<div class="vendor-menu-container">
+  <p class="menu-title">Vendor Dashboard</p>
+  
+  <nav class="vendor-nav">
+    <a class="nav-link" 
+       [routerLink]="['/vendorMenu',{outlets:{'vendor':['vendorInfo']}}]"
+       routerLinkActive="active">Vendor Info</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/vendorMenu',{outlets:{'vendor':['vendorOrders']}}]"
+       routerLinkActive="active">Orders</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/vendorMenu',{outlets:{'vendor':['vendorPendingOrders']}}]"
+       routerLinkActive="active">Pending Orders</a>
+       
+    <a class="nav-link"
+       [routerLink]="['/vendorMenu',{outlets:{'vendor':['vendorAcceptReject']}}]"
+       routerLinkActive="active">Accept/Reject</a>
+       
+    <a class="nav-link home-link"
+       [routerLink]="['/home']">Home</a>
+  </nav>
+  
+  <hr class="divider">
+  
+  <router-outlet name="vendor"></router-outlet>
+</div>
