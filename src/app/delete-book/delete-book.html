@@ -1,0 +1,8 @@
+
+<h2>Delete a Book</h2>
+<form (ngSubmit)="onDelete()">
+  <label>ISBN to delete:
+    <input type="number" [(ngModel)]="isbn" name="isbn" required />
+  </label><br>
+  <button type="submit">Delete Book</button>
+</form>
